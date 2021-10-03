@@ -1,0 +1,70 @@
+{% extends "app/layout.html" %}
+
+{% block content %}
+{% load static %}
+{% if  user.is_staff %} {% if not user.is_superuser %}<h3 class="h3h">{{ title }}</h3><h2 class="sum">{{price_sum}}</h2> {% endif %} {% endif %}
+{% if user.is_superuser %}<a href="{% url 'cart' %}"><h3>Корзина</h3></a><a href="{% url 'completeorders' %}"><h3 class="h33">Заказы</h3> </a><h3 class="h3h">{{ title }}</h3><a href="{% url 'finances' %}"><h3 class="h33">Финансы</h3></a><h2 class="sum">{{price_sum}}</h2>{% endif %}
+{% if user.is_provider %}<a href="{% url 'cart' %}"><h3>Корзина</h3></a><a href="{% url 'completeorders' %}"><h3 class="h33">Заказы</h3> </a><h3 class="h3h">{{ title }}</h3><a href="{% url 'finances' %}"><h3 class="h33">Финансы</h3></a><h2 class="sum">{{price_sum}}</h2>{% endif %}
+
+<div class="row">
+    {% for post in posts %}        {% for post_1 in posts_all %} {% if post_1.author == me %}{% if user.is_provider %}  {% if post_1.id == post.post_id %} {% if post_1.id %} 
+    <div class="manage_order_preview">
+     
+    
+      <div style="height:;"> <h3 class="post_title">{{post_1.title}}</h3>
+        <h5>Пользователь: {{post.author}}</h5>
+        <h5>Поставщик: {{post_1.author}}</h5>
+        {% if post.ready %}<h5>Оплачен {{ post.date }}</h5>
+        {% else %}<h5>Нет оплаты{% endif %}{% if post.on_processing %}(платеж на проверке)
+                     {% else %}{% endif %}</h5></div>
+                           <div style="top:0;width:100%;height:200px;overflow: hidden;"> <img class="card-img-top" src="{{post_1.image.url }}" alt="Изображение"  /> <img class="card-img-top2" src="{{post_1.image.url }}" alt="Изображение"  /> </div>
+       
+
+
+        <h4>Количество: {{post.qnt}}</h4>
+        <div>
+            <a href="{% url 'onelessmanage' pid=post.id %}" class="btn btn-default">‒</a>
+            <a href="{% url 'onemoremanage' nid=post.id %}" class="btn btn-default">+</a>
+        </div>
+
+        <div>
+            <a href="{% url 'delcartmanage' did=post.id %}" type="submit" class="submit_cart">Удалить</a>{% if post.on_processing %}<a href="{% url 'unbuymanage' bid=post.id %}" type="submit" class="submit_cart">Нет оплаты</a><a href="{% url 'buymanage' bid=post.id %}" type="submit" class="submit_cart">Оплачен</a>
+            {% else %} 
+            {% endif %}
+<br><h4><a href="{% url 'order' did=post.id %}" class="submit_cart">Подробнее</a></h4>
+           
+        </div></div>
+{% endif %}{% else %}
+{% endif %}{% endif %}{% endif %}
+{% if user.is_superuser %}  {% if post_1.id == post.post_id %} {% if post.id %}
+    <div class="manage_order_preview">
+     
+    
+        <div style="height:130px;"> <h3 class="post_title">{{post_1.title}}</h3>
+        <h5>Пользователь: {{post.author}}</h5>
+        <h5>Поставщик: {{post_1.author}}</h5>
+        {% if post.ready %}<h5>Оплачен {{ post.date }}</h5>
+        {% else %}<h5>Нет оплаты{% endif %}{% if post.on_processing %}(платеж на проверке)
+                     {% else %}{% endif %}</h5></div>
+                           <div style="top:0;width:100%;height:200px;overflow: hidden;;display: flex;
+  align-items: center;"> <img class="card-img-top" src="{{post_1.image.url }}" alt="Изображение"  /> <img class="card-img-top2" src="{{post_1.image.url }}" alt="Изображение"  /> </div>
+       
+
+
+        <h4>Количество: {{post.qnt}}</h4>
+        <div>
+            <a href="{% url 'onelessmanage' pid=post.id %}" class="btn btn-default">‒</a>
+            <a href="{% url 'onemoremanage' nid=post.id %}" class="btn btn-default">+</a>
+      <br>  <br></div>
+
+        <div>
+            <a href="{% url 'delcartmanage' did=post.id %}" type="submit" class="submit_cart">Удалить</a>{% if post.on_processing %}<a href="{% url 'unbuymanage' bid=post.id %}" type="submit" class="submit_cart">Нет оплаты</a><a href="{% url 'buymanage' bid=post.id %}" type="submit" class="submit_cart">Оплачен</a>
+            {% endif %}
+<br><h4><a href="{% url 'order' did=post.id %}" class="submit_cart">Подробнее</a></h4>
+           
+        </div></div>
+{% endif %}{% else %}    {% endif %}
+{% endif %}
+{% endfor %}{% empty %}<h2 class="nomore">Здесь пока ничего нет ¯ \ _ (ツ) _ / ¯</h2>{% endfor %}   
+</div>
+{% endblock %}

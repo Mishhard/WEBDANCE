@@ -1,0 +1,20 @@
+{% extends "app/layout.html" %}
+
+{% block content %}
+
+ <h3 class="h3h">{{ title }}</h3>
+<div class="row">
+<div class="media">
+    <div class="media-body">
+        <h3>Добавить товар</h3><br />
+        <form method="POST" enctype="multipart/form-data"> {% csrf_token %}
+            <div>
+                {{ productform.as_p }}
+                <button type="submit" class="save btn btn-default">Сохранить</button>
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+
+{% endblock %}

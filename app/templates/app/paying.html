@@ -1,0 +1,52 @@
+{% extends "app/layout.html" %}
+
+{% block content %}
+{% load static %} 
+
+ {% for post in posts %}
+             {% for post_1 in posts_all %} 
+      
+                         {% if post_1.id == post.post_id %} 
+<h3>{{ title }} {{post.id}}</h3><br />
+   {% endif %} 
+                     {% endfor %} 
+        {% endfor %}
+<div class="row">
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div>
+            {% for post in posts %}
+             {% for post_1 in posts_all %} 
+      
+                         {% if post_1.id == post.post_id %} 
+           <h3> Для оплаты заказа, пожалуйста, переведите {% widthratio post_1.price 1 post.qnt %} ₽ с комментарием "{{post.id}}"</h3><br>
+
+                             <h4>Наименование: {{post_1.title}}</h4> 
+<h4>Количество: {{post.qnt}}</h4> 
+                             {% if post.ready %}<h4>Статус: Оплачен</h4> 
+                     {% else %}<h4>Статус: Не оплачен</h4>{% endif %}
+                             <img class="card-img-top1" src="{{post_1.image.url }}" alt="Изображение"  /> 
+                         {% endif %} 
+                     {% endfor %} <br>
+            <a href="{% url 'payed' bid=post.id %}" type="submit">Я оплатил</a>
+        {% endfor %}
+
+        {{ orderform.as_p }}
+       <a href="{% url 'cart' %}" type="submit">Вернуться</a>
+            <div class="blog_comment">
+<br><br>
+    <h7>Ваша почта, на которую мы отправим товар: {{user.email}} </h7>
+   <div class="comment_author"
+
+
+    <h4>{{ message }}</h4><br />
+    <form method="post">
+        {% csrf_token %}
+        <label for="{{ form.email.id_for_label }}">{{ form.email.label }}:</label>
+        {{ form.email }}<br><br>
+        <input type="submit" value="Сменить Email">
+    </form>
+
+</div>
+   
+{% endblock %}

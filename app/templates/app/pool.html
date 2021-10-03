@@ -1,0 +1,64 @@
+{% extends "app/layout.html" %}
+{% block content %}
+
+{% if form != None %}
+<a href="{% url 'contact' %}"><h3>Контакты</h3></a> <h3>Фидбэк</h3>
+<div class="row">
+    <h4>{{ message }}</h4><br />
+    <form method="post">
+        {% csrf_token %}
+        <label for="{{ form.name.id_for_label }}">{{ form.name.label }}:</label>
+        {{ form.name }}<br><br>
+        <label for="{{ form.gender.id_for_label }}">{{ form.gender.label }}:</label>
+        {{ form.gender }}
+        <label for="{{ form.internet.id_for_label }}">{{ form.internet.label }}:</label>
+        {{ form.internet }}<br><br>
+        <label for="{{ form.notice.id_for_label }}">{{ form.notice.label }}:</label>
+        {{ form.notice }}<br><br>
+        <label for="{{ form.email.id_for_label }}">{{ form.email.label }}:</label>
+        {{ form.email }}<br><br>
+        <label for="{{ form.message.id_for_label }}">{{ form.message.label }}:</label>
+        {{ form.message }}<br><br>
+        <input type="submit" value="Отправить">
+    </form>
+</div>
+{% else %}
+<br>
+<h2>Благодарим за предоставленную информацию!</h2>
+<h3>Вот, что мы получили от вас:</h3>
+   <ul>
+    <li><span>Имя:</span> {{ data.name }}</li>
+    <li><span>Что случилось:</span> {{ data.gender }}</li>
+    <li><span>Кем Вы являетесь:</span> {{ data.internet }}</li>
+    <li><span>Продублировать ваше обращение на почту:</span>{{ data.notice }}</li>
+    <li><span>E-mail:</span> {{ data.email }}</li>
+    <li><span>Суть обращения:</span> {{ data.message }}</li>
+   </ul>
+
+{% endif %}
+<p id="p1">
+
+</p>
+
+<script>
+
+function submit_on()
+
+{
+
+    $('[type="submit"]').css('color', 'orange');
+
+}
+
+ function submit_off()
+
+{
+
+    $('[type="submit"]').css('color', 'black');
+
+    }
+
+    $('[type="submit"]').mouseover(submit_on);
+    $('[type="submit"]').mouseout(submit_off);
+</script>
+{% endblock %}

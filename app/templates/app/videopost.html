@@ -1,0 +1,17 @@
+{% extends "app/layout.html" %}
+
+{% block content %}
+<a href="{% url 'blog' %}"><h3>Блог</h3></a> <h3>{{ title }}</h3>{% if user.is_superuser %}<a href="{% url 'newpost' %}"><h3>Добавить статью</h3></a>{% endif %}
+<div class="row" style="box-shadow:0 0 10px 0px rgb(0 45 189)">
+     <h3 class="order", style="box-shadow: none; text-align:left; width:auto;">Как уберечь себя от мошеннеческих интернет магазинов?</h3>
+    <div class="comment_block">
+       
+        <h3>Рассказываем в нашем видеоролике</h3><br />
+        <video src="/media/Video1.mp4"
+               controls="controls"
+               width="800" height="450"
+               poster="/media/image-video1.png"></video>
+    </div>
+</div>    
+
+{% endblock %}

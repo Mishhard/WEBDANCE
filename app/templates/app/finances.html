@@ -1,0 +1,33 @@
+{% extends "app/layout.html" %}
+
+{% block content %}
+{% load static %}
+
+<a href="{% url 'cart' %}"><h3>Корзина</h3></a><a href="{% url 'completeorders' %}"><h3 class="h33">Заказы</h3></a><a href="{% url 'allorders' %}"><h3 class="h33">Управление заказами</h3> </a><h3 class="h3h">Финансы</h3>
+<div class="row">
+<h3>{{ message }}</h3><br />
+<h4>{{price_sum}}</h4>
+<h3>Реквизиты:<h3>
+{% if form != None %}
+    <form method="post">
+        {% csrf_token %}
+       <label for="{{ form.bank.id_for_label }}">{{ form.bank.label }}:</label>
+        {{ form.bank }}
+        <label style="margin-left:40px;" for="{{ form.bik.id_for_label }}">{{ form.bik.label }}:</label>
+        {{ form.bik }}<br><br>
+        <label for="{{ form.kpp.id_for_label }}">{{ form.kpp.label }}:</label>
+        {{ form.kpp }}
+        <label  style="margin-left:40px;" for="{{ form.account.id_for_label }}">{{ form.account.label }}:</label>
+        {{ form.account }}<br><br>
+        <input type="submit" value="Отправить">
+    </form>
+{% else %}
+<h4>Ваш банк: {{req.bank}}</h4>
+<h4>Бик: {{req.bik}}</h4>
+<h4>КПП: {{req.kpp}}</h4>
+<h4>Счёт: {{req.account}}</h4>
+
+{% endif %}
+
+ </div>
+{% endblock %}

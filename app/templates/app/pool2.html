@@ -1,0 +1,45 @@
+﻿
+<br>
+<h2>Отправьте, пожалуйста, заполненную анкету</h2><br>
+<div>
+    <form method="post">
+        {% csrf_token %}
+        <label for="{{ form.name.id_for_label }}">{{ form.name.label }}:</label>
+        {{ form.name }}<br><br>
+        <label for="{{ form.city.id_for_label }}">{{ form.city.label }}:</label>
+        {{ form.city }}<br>
+        <label for="{{ form.gender.id_for_label }}">{{ form.gender.label }}:</label>
+        {{ form.gender }}
+        <label for="{{ form.job.id_for_label }}">{{ form.job.label }}:</label>
+        {{ form.job }}<br><br>
+        {{ form.name }}
+        <label for="{{ form.internet.id_for_label }}">{{ form.intenet.label }}:</label>
+        {{ form.internet }}<br><br>
+        {{ form.name }}
+        <label for="{{ form.notice.id_for_label }}">{{ form.notice.label }}:</label>
+        {{ form.notice }}<br><br>
+        {{ form.name }}
+        <label for="{{ form.email.id_for_label }}">{{ form.email.label }}:</label>
+        {{ form.email }}<br><br>
+        {{ form.name }}
+        <label for="{{ form.message.id_for_label }}">{{ form.message.label }}:</label>
+        {{ form.message }}<br><br>
+        <input type="submit" value="Отправить">
+    </form>
+</div>
+{% else %}
+<br>
+<h2>Благодарим за предоставленную информацию!</h2>
+<h3>Вы сообщили о себе следующее:</h3>
+<ul>
+    <li><span>Имя:</span> {{ date.name }}</li>
+    <li><span>Город:</span> {{ date.city }}</li>
+    <li><span>Пол:</span> {{ date.gender }}</li>
+    <li><span>Работа:</span> {{ date.job }}</li>
+    <li><span>В интернете:</span> {{ date.internet }}</li>
+    <li><span>Получать новости сайта на e-mail:</span>{{ date.name }}</li>
+    <li><span>Ваш e-mail:</span> {{ date.name }}</li>
+    <li><span>Информация о себе:</span> {{ date.name }}</li>
+</ui>
+    {% endif %}
+    { endblock %}

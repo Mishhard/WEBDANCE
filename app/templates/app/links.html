@@ -1,0 +1,11 @@
+{% extends "app/layout.html" %}
+{% load staticfiles %}
+{% block content %}
+
+<h3>{{ message }}</h3><br />
+<div class="row">
+<a href ="http://market.yandex.ru" target="_blank"> <img type="resources" src="{% static 'app/content/Маркет.png' %}" alt="Яндекс.Маркет"/></a>
+<a href ="http://e-katalog.ru" target="_blank"> <img type="resources" src="{% static 'app/content/Каталог.png' %}" alt="E-Katalog"/></a>
+<a href ="https://minpromtorg.gov.ru/" target="_blank"> <img type="resources" src="{% static 'app/content/Минпромторг.png' %}" alt="Минпромторг"/></a>
+</div>
+{% endblock %}

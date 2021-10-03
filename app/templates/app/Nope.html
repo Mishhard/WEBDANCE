@@ -1,0 +1,9 @@
+{% extends "app/layout.html" %}
+
+{% block content %}
+
+<h3>{{ title }}</h3><br />
+<div class="row">
+<h4>{{ message }}</h4><br /> </div>
+<a href="{% url 'home' %}" type="submit">На главную</a></div>
+{% endblock %}

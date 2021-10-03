@@ -1,0 +1,20 @@
+{% extends "app/layout.html" %}
+
+{% block content %}
+<h3 class="h3h">{{ title }}</h3> <a href="{% url 'videopost' %}"><h3>Видео</h3></a>{% if user.is_staff %}<a href="{% url 'newpost' %}"><h3 class="h33">Добавить статью</h3></a>{% endif %}<h2 class="sum">{{price_sum}}</h2>
+<div class="row">
+{% for post in posts %}
+
+<div class="comment_block">
+<h2> {{post.title}}</h2>
+<h4> {{post.posted}}</h4>
+<p> {{post.description}}</p>
+<p><b><a href="{% url 'blogpost' parametr=post.id %}"> Читать далее </a></b></p>
+</div>
+    <hr/>
+    <div></div>
+{% endfor %}
+</div>
+
+
+{% endblock %}

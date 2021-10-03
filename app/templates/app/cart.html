@@ -1,0 +1,42 @@
+{% extends "app/layout.html" %} 
+ 
+{% block content %} 
+{% load static %} 
+<h3 class="h3h">{{ title }}</h3><a href="{% url 'completeorders' %}"><h3>Заказы</h3></a>{% if user.is_superuser %}<a href="{% url 'allorders' %}"><h3 class="h33">Управление заказами</h3></a><a href="{% url 'finances' %}"><h3 class="h33">Финансы</h3></a>
+{% endif %}{% if user.is_provider %}<a href="{% url 'allorders' %}"><h3 class="h33">Управление заказами</h3></a><a href="{% url 'finances' %}"><h3 class="h33">Финансы</h3></a>{% endif %}<h2 class="sum">{{price_sum}}</h2>
+         <div class="row"> 
+             {% for post in posts %}
+                   <div class="order_preview"> 
+                     {% for post_1 in posts_all %} {% widthratio post_1.price 1 post.qnt as width %} 
+     
+                         {% if post_1.id == post.post_id %}  
+{% widthratio post_1.price 1 post.qnt as width %}    
+                             <h3 class="post_title">{{post_1.title}}</h3> 
+      
+
+                     <h5> {% if post.ready %}Статус: Оплачен{% else %}Статус: Не оплачен{% endif %}{% if post.on_processing %}(платеж на проверке)
+                     {% else %}{% endif %}</h5> {{summm}}
+           
+                           <div style="top:0;width:100%;height:200px;overflow: hidden;;display: flex;
+  align-items: center;"> <img class="card-img-top" src="{{post_1.image.url }}" alt="Изображение"  /> <img class="card-img-top2" src="{{post_1.image.url }}" alt="Изображение"  /> </div>
+                       <h3>Сумма: {{width}}</h3>  {% endif %} 
+ 
+                     {% endfor %} 
+
+                                         
+                     <h4>Количество: {{post.qnt}}</h4>
+                    <div> <a href="{% url 'oneless' pid=post.id %}" class="btn btn-default">‒</a>
+                     <a href="{% url 'onemore' nid=post.id %}" class="btn btn-default">+</a></div>
+                    
+                    <div><br> <a href="{% url 'delcart' did=post.id %}" type="submit" class="submit_cart">Удалить</a>  <a href="{% url 'paying' bid=post.id %}" type="submit" class="submit_cart">Оплатить</a><br><br></div>  
+                    </div> 
+                     
+
+ 
+
+
+             {% empty %}
+             <h2 class="nomore">Здесь пока ничего нет ¯ \ _ (ツ) _ / ¯</h2>
+             {% endfor %}
+         </div>
+{% endblock %}

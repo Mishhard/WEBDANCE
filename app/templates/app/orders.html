@@ -1,0 +1,37 @@
+{% extends "app/layout.html" %} 
+ 
+{% block content %} 
+{% load static %} 
+<a href="{% url 'cart' %}"><h3>Корзина</h3></a><h3>Заказы</h3>{% if user.is_superuser %}<a href="{% url 'allorders' %}"><h3 class="h33">Управление заказами</h3></a><a href="{% url 'finances' %}"><h3 class="h33">Финансы</h3></a><h2 class="sum">{{price_sum}}</h2>{% endif %}{% if user.is_provider %}<a href="{% url 'allorders' %}"><h3 class="h33">Управление заказами</h3></a><a href="{% url 'finances' %}"><h3 class="h33">Финансы</h3></a><h2 class="sum">{{price_sum}}</h2>{% endif %}
+
+         <div class="row"> 
+             {% for post in posts %}
+
+                   <div class="order_preview_complete"> 
+                     {% for post_1 in posts_all %} 
+      
+                         {% if post_1.id == post.post_id %} 
+                             <h3 class="order", class="post_title">{{post_1.title}}</h3> 
+           
+                             <h4>Количество: {{post.qnt}}</h4>
+ <h4>Сумма: {% widthratio post_1.price 1 post.qnt %}</h4>
+                           <div style="top:0;width:100%;height:200px;overflow: hidden;;display: flex;
+  align-items: center;"> <img class="card-img-top" src="{{post_1.image.url }}" alt="Изображение"  /> <img class="card-img-top2" src="{{post_1.image.url }}" alt="Изображение"  /> </div>
+                             Оплачен: {{ post.date }}
+                         {% endif %} 
+                    
+                     {% endfor %} 
+                   </div>
+
+                    
+               
+                     
+
+ 
+
+
+             {% empty %}
+             <h2 class="nomore">Здесь пока ничего нет ¯ \ _ (ツ) _ / ¯</h2>
+             {% endfor %}
+         </div>
+{% endblock %}

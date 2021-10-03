@@ -1,0 +1,19 @@
+{% extends "app/layout.html" %}
+
+{% block content %}
+<h3 class="h3h">{{ title }}</h3> <a href="{% url 'pool' %}"><h3>Фидбэк</h3></a>
+<div class="row">
+    <h4>Адрес:</h4>
+<address>
+   Г. Псков<br />
+ Пл. Ленина, 2, 1800019<br />
+    <abbr title="Phone">P:</abbr>
+   8800001100
+</address>
+
+<address>
+    <strong>Поддержка:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
+    <strong>Поставщикам:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
+</address>
+</div>
+{% endblock %}
